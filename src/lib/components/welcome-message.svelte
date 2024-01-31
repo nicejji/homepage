@@ -7,5 +7,5 @@
     <IconGlobe />
     <span>homepage</span>
   </h1>
-  <span class="text-lg">Welcome, <span class="text-foam">nicejji</span></span>
+  <span class="text-lg">powered by <span class="text-foam">nicejji</span></span>
 </div>

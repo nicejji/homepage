@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply w-full h-full text-text bg-basec;
+  @apply w-full h-full text-text bg-basec overflow-hidden;
 }
 
 ::selection {

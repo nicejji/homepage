@@ -1,18 +1,18 @@
 <script lang="ts" context="module">
   import IconStar from "~icons/majesticons/star";
-
-  const FAVORITES: [string, string][] = [
-    ["Instagram", "https://instagram.com"],
-    ["Youtube", "https://youtube.com"],
-    ["Reddit", "https://reddit.com"],
-    ["SoundCloud", "https://soundcloud.com"],
-  ];
-
-  let failed = new Set<number>();
+  import appDB from "../stores/appDB";
 </script>
 
 <script lang="ts">
   const favButtons: HTMLButtonElement[] = [];
+  let failed = new Set<number>();
+
+  const handleLoad = (e: Event, i: number) => {
+    if ((e.target as HTMLImageElement).naturalHeight <= 16) {
+      failed.add(i);
+      failed = failed;
+    }
+  };
 </script>
 
 <!-- TODO: refactor this code -->
@@ -20,9 +20,9 @@
   style="grid-template-columns: repeat(auto-fit, minmax(12rem, max-content))"
   class="grid overflow-auto gap-3 justify-center p-1"
 >
-  {#each FAVORITES as [name, href], i}
+  {#each $appDB.favorites as { href, name }, i}
     {@const domain = new URL(href).hostname}
-    <a {href} class="h-fit w-fit">
+    <a {href} class="rounded-lg h-fit w-fit bg-basec">
       <button
         bind:this={favButtons[i]}
         on:keydown={({ key }) => {
@@ -36,9 +36,9 @@
             <img
               alt=""
               class="h-16"
+              on:load={(e) => handleLoad(e, i)}
               on:error={() => {
                 failed.add(i);
-                // HACK: trigger svelte update
                 failed = failed;
               }}
               src={`https://www.google.com/s2/favicons/?domain=${domain}&sz=128`}

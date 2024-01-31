@@ -8,8 +8,6 @@
   export let providers: Provider[];
   export let providerIndex = 0;
 
-  $: selectionWidth = Math.floor(100 / providers.length);
-
   const selectNext = () => {
     providerIndex = (providerIndex + 1) % providers.length;
   };
@@ -25,22 +23,23 @@
   // };
 </script>
 
-<div class="flex gap-2.5 items-center">
+<div class="flex gap-2 items-center">
   <IconSearch />
   <span>on</span>
-  <div class="flex relative items-center">
+  <div class="flex relative gap-1.5 items-center">
     <div
-      style={`width:${selectionWidth}%;transform:translateX(${
-        100 * providerIndex
-      }%)`}
-      class="absolute h-full rounded-lg transition-transform bg-text"
+      style={`transform:translateX(${100 * providerIndex}%); margin-left:${
+        0.375 * providerIndex
+      }rem`}
+      class="absolute ml-1.5 w-10 h-7 rounded-lg transition-transform bg-text"
     />
     {#each providers as { icon }, i}
       {@const isSelected = i === providerIndex}
       <button
         on:pointerdown|preventDefault={() => (providerIndex = i)}
-        class="z-10 px-2.5 transition-colors"
+        class="z-10 w-10 h-7 rounded-lg transition-colors"
         class:text-basec={isSelected}
+        class:hover:bg-highlightMed={!isSelected}
       >
         <svelte:component this={icon} class="inline align-sub" />
       </button>

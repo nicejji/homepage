@@ -7,7 +7,9 @@
   ];
 </script>
 
-<div class="flex flex-wrap gap-3 justify-center">
+<div
+  class="flex flex-wrap gap-3 justify-center py-1 px-3 rounded-lg bg-basec/70"
+>
   {#each KEY_DESC as [keys, description]}
     <div class="flex gap-3 items-center text-xs text-subtle">
       <div class="flex gap-1 items-center">
@@ -20,7 +22,7 @@
         {/each}
       </div>
       <span>-</span>
-      <span>{description}</span>
+      <span class="font-thin">{description}</span>
     </div>
   {/each}
 </div>
